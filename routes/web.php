@@ -27,5 +27,6 @@ Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 Route::view('/product-detail', 'products-detail')->name('products-detail');
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
+Route::post('/cart', 'CartController@store')->name('cart.store');
 // Route::view('/checkout', 'checkout');
 // Route::view('/thankyou', 'thankyou');
