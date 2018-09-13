@@ -197,7 +197,7 @@
 							</div>
 
 							<div class="block2-txt p-t-20">
-								<a href="{{route('shop.show',$product->slug)}}" class="block2-name dis-block s-text3 p-b-5">
+								<a href="{{route('shop.show', $product->slug)}}" class="block2-name dis-block s-text3 p-b-5">
 										{{$product->name}}
 									</a>
 

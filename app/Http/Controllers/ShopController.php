@@ -29,7 +29,11 @@ class ShopController extends Controller
     {
         //
         $product = Product::where('slug', $slug)->firstOrFail();
-        return view('products-detail')->with('product', $product);
+        $productRelates = Product::where('slug', '!=', $slug)->inRandomOrder()->take(8)->get();
+        return view('products-detail')->with([
+            'product' => $product,
+            'productRelates' => $productRelates,
+        ]);
 
     }
 

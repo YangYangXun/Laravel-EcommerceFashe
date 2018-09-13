@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Cart')
 @section('plugin_css_for_this_page')
 
 @endsection
@@ -14,7 +15,8 @@
 		</h2>
 	</section>
 
-	<!-- Cart -->
+
+    <!-- Cart -->
 	<section class="cart bgwhite p-t-70 p-b-100">
 		<div class="container">
 			<!-- Cart item -->

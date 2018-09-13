@@ -84,7 +84,7 @@
 					<span class="linedivide1"></span>
 
 					<div class="header-wrapicon2 m-r-13">
-                        <img src="images/icons/icon-header-02.png"  class="header-icon1" alt="ICON">
+                        <img src="images/icons/icon-header-02.png"  class="header-icon1 js-show-header-dropdown" alt="ICON">
 						<span class="header-icons-noti">0</span>
 
 						<!-- Header cart noti -->
@@ -146,7 +146,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="{{route('cart.index')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -182,7 +182,7 @@
 							</li>
 
 							<li>
-								<a href="{{route('cart')}}">Cart</a>
+								<a href="{{route('cart.index')}}">Cart</a>
 							</li>
 
 							<li>
@@ -218,15 +218,16 @@
 			<div class="btn-show-menu">
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
-					<a href="#" class="header-wrapicon1 dis-block">
+					<a href="" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 					</a>
 
 					<span class="linedivide2"></span>
 
 					<div class="header-wrapicon2">
+					<a href="{{route('cart.index')}}" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+						<span class="header-icons-noti">0</span></a>
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
