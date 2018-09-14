@@ -25,8 +25,13 @@ Route::get('/shop', 'ShopController@index')->name('shop.index');
 Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 
 Route::view('/product-detail', 'products-detail')->name('products-detail');
+Route::get('/empty', function () {
+    Cart::destroy();
+});
 
 Route::get('/cart', 'CartController@index')->name('cart.index');
-Route::post('/cart', 'CartController@store')->name('cart.store');
+Route::post('/cart/{product}', 'CartController@store')->name('cart.store');
+Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
+
 // Route::view('/checkout', 'checkout');
 // Route::view('/thankyou', 'thankyou');

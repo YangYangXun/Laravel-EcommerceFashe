@@ -77,66 +77,38 @@
 
 					<!--  -->
 					<a href="#" class="header-wrapicon1 dis-block m-l-30">
-						<!-- <img src="{{ URL::asset('theme-images/icon-header-01.png') }}" class="header-icon1" alt="ICON"> -->
-                        <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                        <img src="{{ URL::asset('images/icons/icon-header-01.png') }}" class="header-icon1" alt="ICON">
 					</a>
 
 					<span class="linedivide1"></span>
 
 					<div class="header-wrapicon2 m-r-13">
-                        <img src="images/icons/icon-header-02.png"  class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+						<!-- <img src="images/icons/icon-header-02.png"  class="header-icon1 js-show-header-dropdown" alt="ICON"> -->
+						<img src="{{ URL::asset('images/icons/icon-header-02.png') }}"  class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+						@if(Cart::count() > 0)
+						<span class="header-icons-noti">{{Cart::count()}}</span>
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
+								@foreach (Cart::content() as $item)
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-										<img src="images/item-cart-01.jpg" alt="IMG">
+										<img src="{{ URL::asset('images/'.$item->model->slug.'.jpg') }}" alt="IMG">
 									</div>
 
 									<div class="header-cart-item-txt">
 										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
+											{{$item->model->name}}
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x $19.00
+											1 x {{$item->model->presetPrice()}}
 										</span>
 									</div>
 								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-02.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-03.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-									</div>
-								</li>
+                                @endforeach
 							</ul>
 
 							<div class="header-cart-total">
@@ -159,6 +131,7 @@
 								</div>
 							</div>
 						</div>
+						@endif
 					</div>
 				</div>
 			</div>

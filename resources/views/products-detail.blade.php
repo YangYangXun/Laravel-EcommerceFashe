@@ -105,12 +105,15 @@
 								</button>
 							</div>
 
-							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+							<!-- <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10"> -->
 								<!-- Button -->
-								<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-									Add to Cart
-								</button>
-							</div>
+								<form action="{{ route('cart.store', $product) }}" method="POST" class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+									{{ csrf_field() }}
+									<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+										Add to Cart
+									</button>
+								</form>
+							<!-- </div> -->
 						</div>
 					</div>
 				</div>

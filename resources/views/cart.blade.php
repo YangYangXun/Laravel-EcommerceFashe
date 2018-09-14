@@ -19,6 +19,24 @@
     <!-- Cart -->
 	<section class="cart bgwhite p-t-70 p-b-100">
 		<div class="container">
+			@if (session()->has('success_message'))
+				<div class="alert alert-success">
+					{{ session()->get('success_message') }}
+				</div>
+			@endif
+
+			@if(count($errors) > 0)
+				<div class="alert alert-danger">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+
+			@if(Cart::count() > 0)
+            <h1 class="text-center mt-3 mb-5">{{Cart::count()}} item(s) in shoping cart</h1>
 			<!-- Cart item -->
 			<div class="container-table-cart pos-relative">
 				<div class="wrap-table-shopping-cart bgwhite">
@@ -27,18 +45,20 @@
 							<th class="column-1"></th>
 							<th class="column-2">Product</th>
 							<th class="column-3">Price</th>
-							<th class="column-4 p-l-70">Quantity</th>
+							<th class="column-4">Quantity</th>
 							<th class="column-5">Total</th>
+							<th class="column-6">Remove</th>
 						</tr>
-
+                        @foreach (Cart::content() as $item)
 						<tr class="table-row">
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="images/item-10.jpg" alt="IMG-PRODUCT">
+									<img src="images/{{$item->model->slug}}.jpg" alt="IMG-PRODUCT">
 								</div>
 							</td>
-							<td class="column-2">Men Tshirt</td>
-							<td class="column-3">$36.00</td>
+
+							<td class="column-2"><a href="{{route('shop.show',$item->model->slug)}}">{{$item->model->name}}</a></td>
+							<td class="column-3">{{$item->model->presetPrice()}}</td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
 									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
@@ -53,31 +73,18 @@
 								</div>
 							</td>
 							<td class="column-5">$36.00</td>
-						</tr>
-
-						<tr class="table-row">
-							<td class="column-1">
-								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="images/item-05.jpg" alt="IMG-PRODUCT">
-								</div>
+							<td class="column-6">
+								<form method="POST" action="{{route('cart.destroy',$item->rowId)}}">
+									  {{ csrf_field() }}
+									  {{ method_field('DELETE') }}
+									  <button class="btn btn-outline-dark">
+										Remove
+									  </button>
+								</form>
 							</td>
-							<td class="column-2">Mug Adventure</td>
-							<td class="column-3">$16.00</td>
-							<td class="column-4">
-								<div class="flex-w bo5 of-hidden w-size17">
-									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-									</button>
-
-									<input class="size8 m-text18 t-center num-product" type="number" name="num-product2" value="1">
-
-									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-									</button>
-								</div>
-							</td>
-							<td class="column-5">$16.00</td>
 						</tr>
+                        @endforeach
+
 					</table>
 				</div>
 			</div>
@@ -128,37 +135,9 @@
 					</span>
 
 					<div class="w-size20 w-full-sm">
-						<p class="s-text8 p-b-23">
+						<p class="s-text8 p-b-5">
 							There are no shipping methods available. Please double check your address, or contact us if you need any help.
 						</p>
-
-						<span class="s-text19">
-							Calculate Shipping
-						</span>
-
-						<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-							<select class="selection-2" name="country">
-								<option>Select a country...</option>
-								<option>US</option>
-								<option>UK</option>
-								<option>Japan</option>
-							</select>
-						</div>
-
-						<div class="size13 bo4 m-b-12">
-						<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">
-						</div>
-
-						<div class="size13 bo4 m-b-22">
-							<input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip">
-						</div>
-
-						<div class="size14 trans-0-4 m-b-10">
-							<!-- Button -->
-							<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-								Update Totals
-							</button>
-						</div>
 					</div>
 				</div>
 
@@ -169,7 +148,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						$39.00
+						{{ presetPrice(Cart::subtotal()) }}
 					</span>
 				</div>
 
@@ -180,6 +159,14 @@
 					</button>
 				</div>
 			</div>
+			@else
+			<div class="text-center">
+				<h1 class="mt-3 mb-5">No item(s) in shoping cart</h1>
+
+				<a href="{{route('shop.index')}}" >Continue shopping</a>
+			</div>
+			@endif
+
 		</div>
 	</section>
 
