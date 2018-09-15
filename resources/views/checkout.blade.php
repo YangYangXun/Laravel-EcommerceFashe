@@ -30,12 +30,29 @@
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+
+
+.btn-outline-dark{
+   &:disabled {
+        background: lighten($primary, 10%);
+        cursor: not-allowed;
+    }
+}
 </style>
 
 @endsection
 
 @section('content')
 <div class="container">
+     @if(count($errors) > 0)
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{!! $error !!}</li>
+							@endforeach
+						</ul>
+					</div>
+        			@endif
 	<h2 class="ml-5">Check out</h2>
 	@if (session()->has('success_message'))
 		<div class="alert alert-success">
@@ -51,23 +68,23 @@
 						</h5>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="email" name="email" value="" placeholder="Email Address">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="email" name="email" value="{{ old('email') }}" placeholder="Email Address" required>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="name" name="name" value="" placeholder="Full Name">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Full Name" required>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="address" name="address" value="" placeholder="Address">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Address" required>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="city" name="city" value="" placeholder="City">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="city" name="city" value="{{ old('city') }}" placeholder="City" required>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="phone" name="phone" value="" placeholder="Phone">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="phone" name="phone" value="{{ old('phone') }}" placeholder="Phone" required>
 						</div>
 
 
@@ -76,7 +93,7 @@
 						</h5>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="name_on_card" name="name_on_card" value="" placeholder="Name on card">
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="name_on_card" name="name_on_card" value="" placeholder="Name on card" required>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
@@ -92,7 +109,7 @@
 
 						<div class="w-size25 mt-4">
 							<!-- Button -->
-							<button type="submit" id="complete-order" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+							<button type="submit" id="complete-order" class="btn btn-outline-dark flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
 								Send
 							</button>
 						</div>
@@ -256,22 +273,36 @@
 		}
 		});
 
-		// Handle form submission.
-		var form = document.getElementById('payment-form');
-		form.addEventListener('submit', function(event) {
-		event.preventDefault();
+ 		// Handle form submission
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+              event.preventDefault();
 
-		stripe.createToken(card).then(function(result) {
-				if (result.error) {
-				// Inform the user if there was an error.
-				var errorElement = document.getElementById('card-errors');
-				errorElement.textContent = result.error.message;
-				} else {
-				// Send the token to your server.
-				stripeTokenHandler(result.token);
-				}
-			});
-		});
+              // Disable the submit button to prevent repeated clicks
+              document.getElementById('complete-order').disabled = true;
+
+              var options = {
+                name: document.getElementById('name_on_card').value,
+                address_line1: document.getElementById('address').value,
+                address_city: document.getElementById('city').value,
+                // address_state: document.getElementById('province').value,
+                // address_zip: document.getElementById('postalcode').value
+              }
+
+              stripe.createToken(card, options).then(function(result) {
+                if (result.error) {
+                  // Inform the user if there was an error
+                  var errorElement = document.getElementById('card-errors');
+                  errorElement.textContent = result.error.message;
+
+                  // Enable the submit button
+                  document.getElementById('complete-order').disabled = false;
+                } else {
+                  // Send the token to your server
+                  stripeTokenHandler(result.token);
+                }
+            });
+        });
 
 		function stripeTokenHandler(token) {
 			// Insert the token ID into the form so it gets submitted to the server

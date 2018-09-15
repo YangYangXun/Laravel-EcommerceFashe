@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Cartalyst\Stripe\Exception\CardErrorException;
-use Cartalyst\Stripe\Laravel\Facades\Stripe;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use App\Http\Requests\CheckoutRequest;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Cartalyst\Stripe\Laravel\Facades\Stripe;
+use Cartalyst\Stripe\Exception\CardErrorException;
 
 class CheckoutController extends Controller
 {
@@ -36,12 +37,17 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CheckoutRequest $request)
     {
         //
 
         // dd($request->all());
         try {
+
+            $contents = Cart::content()->map(function ($item) {
+                return $item->model->slug . ', ' . $item->qty;
+            })->values()->toJson();
+
             $charge = Stripe::charges()->create([
                 'amount' => Cart::subtotal() / 1000,
                 'currency' => 'TWD',
@@ -49,8 +55,8 @@ class CheckoutController extends Controller
                 'description' => 'Order',
                 'receipt_email' => $request->email,
                 'metadata' => [
-                    // 'contents' => $contents,
-                    // 'quantity' => Cart::instance('default')->count(),
+                    'contents' => $contents,
+                    'quantity' => Cart::instance('default')->count(),
                     // 'discount' => collect(session()->get('coupon'))->toJson(),
                 ],
             ]);
@@ -71,7 +77,7 @@ class CheckoutController extends Controller
 
         } catch (CardErrorException $e) {
             // $this->addToOrdersTables($request, $e->getMessage());
-            // return back()->withErrors('Error! ' . $e->getMessage());
+            return back()->withErrors('Error! ' . $e->getMessage());
         }
 
     }
