@@ -33,5 +33,5 @@ Route::get('/cart', 'CartController@index')->name('cart.index');
 Route::post('/cart/{product}', 'CartController@store')->name('cart.store');
 Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
 
-// Route::view('/checkout', 'checkout');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 // Route::view('/thankyou', 'thankyou');
