@@ -50,7 +50,7 @@
 				</h4>
 
 				<span class="m-text17">
-					{{$product->presetPrice()}}
+					{{$product->presentPrice()}}
 				</span>
 
 				<p class="s-text8 p-t-10">
@@ -210,7 +210,7 @@
 								</a>
 
 								<span class="block2-price m-text6 p-r-5">
-									{{$product->presetPrice()}}
+									{{$product->presentPrice()}}
 								</span>
 							</div>
 						</div>

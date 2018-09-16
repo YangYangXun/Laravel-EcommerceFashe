@@ -126,8 +126,8 @@
 					<tr class="">
 						<th class=""></th>
 						<th class="">Product</th>
-						<th class="">Price</th>
 						<th class="">Quantity</th>
+						<th class="">Price</th>
 					</tr>
                     @foreach (Cart::content() as $item)
 					<tr class="">
@@ -137,8 +137,8 @@
 							</div>
 						</td>
 						<td class="">{{$item->model->name}}</td>
-						<td class="">{{$item->model->presetPrice()}}</td>
-						<td class=""></td>
+						<td class="">{{ $item->qty }}</td>
+						<td class="">{{ presentPrice($item->subtotal) }}</td>
 					</tr>
 					@endforeach
 				</table>
@@ -169,14 +169,11 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						{{ presetPrice(Cart::subtotal()) }}
+						{{ presentPrice(Cart::subtotal()) }}
 					</span>
 				</div>
 
-				<div class="size15 trans-0-4">
-					<!-- Button -->
-					<a href="{{route('checkout.index')}}" class="btn btn-outline-dark flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">Proceed to Checkout</a>
-				</div>
+
 			</div>
 		</div>
 	</div>

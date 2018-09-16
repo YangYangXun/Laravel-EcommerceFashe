@@ -4,6 +4,7 @@
 	<title>Fashe | @yield('title')</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="{{ URL::asset('theme-images/favicon.png') }}"/>
 <!--===============================================================================================-->
@@ -104,7 +105,7 @@
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x {{$item->model->presetPrice()}}
+											{{ $item->qty }} x {{$item->model->presentPrice()}}
 										</span>
 									</div>
 								</li>
@@ -112,7 +113,7 @@
 							</ul>
 
 							<div class="header-cart-total">
-								Total: $75.00
+								Total: {{ presentPrice(Cart::subtotal()) }}
 							</div>
 
 							<div class="header-cart-buttons">
@@ -125,7 +126,7 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="{{route('checkout.index')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										Check Out
 									</a>
 								</div>

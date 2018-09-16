@@ -58,21 +58,21 @@
 							</td>
 
 							<td class="column-2"><a href="{{route('shop.show',$item->model->slug)}}">{{$item->model->name}}</a></td>
-							<td class="column-3">{{$item->model->presetPrice()}}</td>
+							<td class="column-3">{{$item->model->presentPrice()}}</td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
-									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2 quantity"  data-id="{{ $item->rowId }}">
 										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
 									</button>
 
-									<input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="1">
+									<input id="{{ $item->rowId }}" class="size8 m-text18 t-center num-product quantity" type="number" name="num-product1" value="{{ $item->qty }}">
 
-									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2 quantity"  data-id="{{ $item->rowId }}">
 										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
 									</button>
 								</div>
 							</td>
-							<td class="column-5">$36.00</td>
+							<td class="column-5">{{ presentPrice($item->subtotal) }}</td>
 							<td class="column-6">
 								<form method="POST" action="{{route('cart.destroy',$item->rowId)}}">
 									  {{ csrf_field() }}
@@ -118,17 +118,6 @@
 				</h5>
 
 				<!--  -->
-				<div class="flex-w flex-sb-m p-b-12">
-					<span class="s-text18 w-size19 w-full-sm">
-						Subtotal:
-					</span>
-
-					<span class="m-text21 w-size20 w-full-sm">
-						$39.00
-					</span>
-				</div>
-
-				<!--  -->
 				<div class="flex-w flex-sb bo10 p-t-15 p-b-20">
 					<span class="s-text18 w-size19 w-full-sm">
 						Shipping:
@@ -148,7 +137,7 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						{{ presetPrice(Cart::subtotal()) }}
+						{{ presentPrice(Cart::subtotal()) }}
 					</span>
 				</div>
 
@@ -175,6 +164,30 @@
 @endsection
 
 @section('plugin_js_for_this_page')
-
-
+<script src="{{ URL::asset('js/app.js') }}"></script>
+<script>
+ (function(){
+	const classname = document.querySelectorAll('.quantity')
+	// const productQuantity = document.querySelector('.num-product')
+	Array.from(classname).forEach(function(element) {
+		const id = element.getAttribute('data-id')
+		// const productQuantity = element.getAttribute('value')
+		const productQuantity = document.getElementById(id);
+        element.addEventListener('click', function() {
+		  	axios.patch(`/EcommerceFashe/public/cart/${id}`, {
+				quantity: productQuantity.value,
+				id: id
+			})
+			.then(function (response) {
+				console.log(response);
+				// window.location.href = '{{ route('cart.index') }}'
+			})
+			.catch(function (error) {
+				console.log(error);
+				console.log('QQ');
+			});
+	   })
+	})
+ })();
+</script>
 @endsection
