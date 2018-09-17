@@ -7,9 +7,9 @@
 @section('content')
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/heading-pages-02.jpg);">
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="min-height:50vh;background-image: url(images/heading-pages-02.jpg);background-position:center center;background-size:cover;">
 	<h2 class="l-text2 t-center">
-		Women
+		{{$categoryName}}
 	</h2>
 	<p class="m-text13 t-center">
 		New Arrivals Women Collection 2018
@@ -30,105 +30,38 @@
 
 					<ul class="p-b-54">
 						<li class="p-t-4">
-							<a href="#" class="s-text13 active1">
+							<a href="{{route('shop.index')}}" class="s-text13 active1">
 									All
-								</a>
+							</a>
 						</li>
-
+						@foreach ($categories as $category)
 						<li class="p-t-4">
-							<a href="#" class="s-text13">
-									Women
-								</a>
+							<a href="{{route('shop.index',['category' => $category->slug ])}}" class="s-text13">
+									{{$category->name}}
+							</a>
 						</li>
+						@endforeach
 
-						<li class="p-t-4">
-							<a href="#" class="s-text13">
-									Men
-								</a>
-						</li>
-
-						<li class="p-t-4">
-							<a href="#" class="s-text13">
-									Kids
-								</a>
-						</li>
-
-						<li class="p-t-4">
-							<a href="#" class="s-text13">
-									Accesories
-								</a>
-						</li>
 					</ul>
-
-					<!--  -->
-					<h4 class="m-text14 p-b-32">
-						Filters
-					</h4>
 
 					<div class="filter-price p-t-22 p-b-50 bo3">
 						<div class="m-text15 p-b-17">
 							Price
 						</div>
 
-						<div class="wra-filter-bar">
-							<div id="filter-bar"></div>
-						</div>
-
-						<div class="flex-sb-m flex-w p-t-16">
-							<div class="w-size11">
-								<!-- Button -->
-								<button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
-										Filter
-									</button>
-							</div>
-
-							<div class="s-text3 p-t-10 p-b-10">
-								Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
-							</div>
-						</div>
-					</div>
-
-					<div class="filter-color p-t-22 p-b-50 bo3">
-						<div class="m-text15 p-b-12">
-							Color
-						</div>
-
-						<ul class="flex-w">
-							<li class="m-r-10">
-								<input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
-								<label class="color-filter color-filter1" for="color-filter1"></label>
+						<ul class="p-b-54">
+							<li class="p-t-4">
+								<a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'high_low']) }}" class="s-text13 active1">
+										Hight to Low
+								</a>
 							</li>
-
-							<li class="m-r-10">
-								<input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
-								<label class="color-filter color-filter2" for="color-filter2"></label>
-							</li>
-
-							<li class="m-r-10">
-								<input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
-								<label class="color-filter color-filter3" for="color-filter3"></label>
-							</li>
-
-							<li class="m-r-10">
-								<input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
-								<label class="color-filter color-filter4" for="color-filter4"></label>
-							</li>
-
-							<li class="m-r-10">
-								<input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
-								<label class="color-filter color-filter5" for="color-filter5"></label>
-							</li>
-
-							<li class="m-r-10">
-								<input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
-								<label class="color-filter color-filter6" for="color-filter6"></label>
-							</li>
-
-							<li class="m-r-10">
-								<input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
-								<label class="color-filter color-filter7" for="color-filter7"></label>
+							<li class="p-t-4">
+								<a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'low_high']) }}" class="s-text13 active1">
+										Low to High
+								</a>
 							</li>
 						</ul>
+
 					</div>
 
 					<div class="search-product pos-relative bo4 of-hidden">
@@ -145,16 +78,12 @@
 				<!--  -->
 				<div class="flex-sb-m flex-w p-b-35">
 					<div class="flex-w">
-						<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-							<select class="selection-2" name="sorting">
-									<option>Default Sorting</option>
-									<option>Popularity</option>
-									<option>Price: low to high</option>
-									<option>Price: high to low</option>
-								</select>
+
+					    <div>
+						<h2>{{$categoryName}}</h2>
 						</div>
 
-						<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+						<!-- <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
 							<select class="selection-2" name="sorting">
 									<option>Price</option>
 									<option>$0.00 - $50.00</option>
@@ -164,11 +93,11 @@
 									<option>$200.00+</option>
 
 								</select>
-						</div>
+						</div> -->
 					</div>
 
 					<span class="s-text8 p-t-5 p-b-5">
-							Showing 1¡V12 of 16 results
+							Showing {{count($products)}} results
 						</span>
 				</div>
 
@@ -178,20 +107,20 @@
 					<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
 						<!-- Block2 -->
 						<div class="block2">
-							<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+							<div class="block2-img wrap-pic-w of-hidden pos-relative ">
 								<img src="images/{{$product->slug}}.jpg" alt="IMG-PRODUCT">
 
 								<div class="block2-overlay trans-0-4">
-									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+									<!-- <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
 											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
 											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-										</a>
+									</a> -->
 
 									<div class="block2-btn-addcart w-size1 trans-0-4">
 										<!-- Button -->
 										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
 												Add to Cart
-											</button>
+										</button>
 									</div>
 								</div>
 							</div>
@@ -212,10 +141,10 @@
 				</div>
 
 				<!-- Pagination -->
-				<div class="pagination flex-m flex-w p-t-26">
+				<!-- <div class="pagination flex-m flex-w p-t-26">
 					<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
 					<a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

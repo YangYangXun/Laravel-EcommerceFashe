@@ -9,7 +9,7 @@
 
 
 	<!-- Title Page -->
-	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/heading-pages-01.jpg);">
+	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="min-height:40vh;background-image: url(images/heading-pages-01.jpg);background-position:center center;background-size:cover;">
 		<h2 class="l-text2 t-center">
 			Cart
 		</h2>
