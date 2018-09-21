@@ -68,7 +68,7 @@
 						</h5>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="email" name="email" value="{{ old('email') }}" placeholder="Email Address" required>
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="email" name="email" value="{{ auth()->user()->email }}" placeholder="Email Address" required>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">

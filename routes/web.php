@@ -11,9 +11,7 @@
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ShopHomeController@index');
 
 Route::get('/main', function () {
     return view('layouts.main');
@@ -35,7 +33,7 @@ Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy')
 // for ajax
 Route::patch('/cart/{product}', 'CartController@update')->name('cart.update');
 
-Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->middleware('auth');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 
 Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');

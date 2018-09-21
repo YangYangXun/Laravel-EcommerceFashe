@@ -65,21 +65,46 @@
 				</a>
 
 				<div class="topbar-child2">
+
+                    @guest
 					<span class="topbar-email">
-						fashe@example.com
+						  <a class="m-3" href="{{ route('login') }}">{{ __('Login') }}</a>
 					</span>
 
-					<div class="topbar-language rs1-select2">
+					<span class="topbar-email">
+						  <a class="m-3" href="{{ route('register') }}">{{ __('Register') }}</a>
+					</span>
+
+
+					<!-- <div class="topbar-language rs1-select2">
 						<select class="selection-1" name="time">
 							<option>USD</option>
 							<option>EUR</option>
 						</select>
-					</div>
+					</div> -->
 
 					<!--  -->
+					@else
 					<a href="#" class="header-wrapicon1 dis-block m-l-30">
                         <img src="{{ URL::asset('images/icons/icon-header-01.png') }}" class="header-icon1" alt="ICON">
 					</a>
+
+
+					<span class="topbar-email ml-2 mr-2">
+						  {{ Auth::user()->name }} @example.com
+					</span>
+					<span class="topbar-email ml-2 mr-2">
+						  <a class="" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                        </form>
+					</span>
+					@endguest
 
 					<span class="linedivide1"></span>
 
