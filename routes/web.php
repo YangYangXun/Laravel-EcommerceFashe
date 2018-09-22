@@ -36,6 +36,9 @@ Route::patch('/cart/{product}', 'CartController@update')->name('cart.update');
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->middleware('auth');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 
+// Guest checkout
+Route::get('/guestcheckout', 'CheckoutController@index')->name('guestcheckout.index');
+
 Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
 
 Auth::routes();

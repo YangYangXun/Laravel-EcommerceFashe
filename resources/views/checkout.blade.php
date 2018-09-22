@@ -68,11 +68,15 @@
 						</h5>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="email" name="email" value="{{ auth()->user()->email }}" placeholder="Email Address" required>
+							@if(auth()->user())
+								<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="email" name="email" value="{{ auth()->user()->email }}" placeholder="Email Address" required>
+							@else
+							    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="email" name="email" value="{{ old('email') }}" placeholder="Email Address" required>
+							@endif
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Full Name" required>
+							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Name" required>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
