@@ -91,7 +91,7 @@
 
 
 					<span class="topbar-email ml-2 mr-2">
-						  {{ Auth::user()->name }} @example.com
+						 {{ Auth::user()->name }}
 					</span>
 					<span class="topbar-email ml-2 mr-2">
 						  <a class="" href="{{ route('logout') }}"
@@ -109,7 +109,7 @@
 					<span class="linedivide1"></span>
 
 					<div class="header-wrapicon2 m-r-13">
-						<!-- <img src="images/icons/icon-header-02.png"  class="header-icon1 js-show-header-dropdown" alt="ICON"> -->
+
 						<img src="{{ URL::asset('images/icons/icon-header-02.png') }}"  class="header-icon1 js-show-header-dropdown" alt="ICON">
 
 						@if(Cart::count() > 0)
@@ -176,24 +176,16 @@
 								<a href="{{route('shop.index')}}">Shop</a>
 							</li>
 
-							<li class="sale-noti">
-								<a href="product.html">Sale</a>
-							</li>
-
 							<li>
 								<a href="{{route('cart.index')}}">Cart</a>
 							</li>
 
 							<li>
-								<a href="{{route('products-detail')}}">Product Detail</a>
+								<a href="{{route('about.index')}}">About</a>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
-							</li>
-
-							<li>
-								<a href="contact.html">Contact</a>
+								<a href="{{route('contact.index')}}">Contact</a>
 							</li>
 						</ul>
 					</nav>
@@ -218,7 +210,11 @@
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
 					<a href="" class="header-wrapicon1 dis-block">
+					    @guest
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+						@else
+						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON"> {{ Auth::user()->name }}
+						@endguest
 					</a>
 
 					<span class="linedivide2"></span>
@@ -226,80 +222,12 @@
 					<div class="header-wrapicon2">
 					<a href="{{route('cart.index')}}" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						@if(Cart::count() > 0)
+						<span class="header-icons-noti">{{Cart::count()}}</span></a>
+						@else
 						<span class="header-icons-noti">0</span></a>
+                        @endif
 
-						<!-- Header cart noti -->
-						<div class="header-cart header-dropdown">
-							<ul class="header-cart-wrapitem">
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-01.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-02.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-03.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-									</div>
-								</li>
-							</ul>
-
-							<div class="header-cart-total">
-								Total: $75.00
-							</div>
-
-							<div class="header-cart-buttons">
-								<div class="header-cart-wrapbtn">
-									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										View Cart
-									</a>
-								</div>
-
-								<div class="header-cart-wrapbtn">
-									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
-									</a>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 
@@ -315,70 +243,56 @@
 		<div class="wrap-side-menu" >
 			<nav class="side-menu">
 				<ul class="main-menu">
-					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-						<span class="topbar-child1">
-							Free shipping for standard order over $100
-						</span>
+
+                    @guest
+					<li class="item-menu-mobile">
+						<a href="{{route('login')}}">Login</a>
 					</li>
 
+					<li class="item-menu-mobile">
+						<a href="{{route('register')}}">Register</a>
+					</li>
+
+                    @else
 					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
 						<div class="topbar-child2-mobile">
 							<span class="topbar-email">
-								fashe@example.com
+								Welcome {{ Auth::user()->name }}
 							</span>
-
-							<div class="topbar-language rs1-select2">
-								<select class="selection-1" name="time">
-									<option>USD</option>
-									<option>EUR</option>
-								</select>
-							</div>
 						</div>
 					</li>
+					<li class="item-menu-mobile">
+						<a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Logout</a>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                        </form>
+					</li>
+					@endguest
 
-					<li class="item-topbar-mobile p-l-10">
-						<div class="topbar-social-mobile">
-							<a href="#" class="topbar-social-item fa fa-facebook"></a>
-							<a href="#" class="topbar-social-item fa fa-instagram"></a>
-							<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
-							<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
-							<a href="#" class="topbar-social-item fa fa-youtube-play"></a>
-						</div>
+
+
+					<li class="item-menu-mobile">
+						<a href="{{route('home')}}">Home</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
-						<ul class="sub-menu">
-							<li><a href="index.html">Homepage V1</a></li>
-							<li><a href="home-02.html">Homepage V2</a></li>
-							<li><a href="home-03.html">Homepage V3</a></li>
-						</ul>
-						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+						<a href="{{route('shop.index')}}">Shop</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
+						<a href="{{route('cart.index')}}">Cart</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
+						<a href="{{route('about.index')}}">About</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="cart.html">Features</a>
+						<a href="{{route('contact.index')}}">Contact</a>
 					</li>
 
-					<li class="item-menu-mobile">
-						<a href="blog.html">Blog</a>
-					</li>
 
-					<li class="item-menu-mobile">
-						<a href="about.html">About</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -391,59 +305,40 @@
 	<!-- Footer -->
 	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
 		<div class="flex-w p-b-90">
-			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3 ml-5">
 				<h4 class="s-text12 p-b-30">
 					GET IN TOUCH
 				</h4>
 
 				<div>
 					<p class="s-text7 w-size27">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+						Any questions? Let us know .<br>
+						Email : ecommfashe@fashe.com
 					</p>
 
-					<div class="flex-m p-t-30">
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
-					</div>
 				</div>
 			</div>
 
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4 ml-5">
 				<h4 class="s-text12 p-b-30">
 					Categories
 				</h4>
 
 				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Men
-						</a>
-					</li>
+				   <?php $categories = App\Category::all();?>
 
+					@foreach ($categories as $category)
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Women
+						<a href="{{route('shop.index',['category' => $category->slug ])}}" class="s-text7">
+									{{$category->name}}
 						</a>
 					</li>
+					@endforeach
 
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Dresses
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Sunglasses
-						</a>
-					</li>
 				</ul>
 			</div>
 
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4 ml-5">
 				<h4 class="s-text12 p-b-30">
 					Links
 				</h4>
@@ -451,107 +346,72 @@
 				<ul>
 					<li class="p-b-9">
 						<a href="#" class="s-text7">
-							Search
+							Shop
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
+						<a href="{{route('cart.index')}}" class="s-text7">
+							Cart
+						</a>
+					</li>
+
+					<li class="p-b-9">
+						<a href="{{route('about.index')}}" class="s-text7">
 							About Us
 						</a>
 					</li>
 
 					<li class="p-b-9">
-						<a href="#" class="s-text7">
+						<a href="{{route('contact.index')}}" class="s-text7">
 							Contact Us
 						</a>
 					</li>
 
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
 				</ul>
 			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Help
-				</h4>
-
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Track Order
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Shipping
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							FAQs
-						</a>
-					</li>
-				</ul>
-			</div>
-
+			<div class="ml-4"></div>
 			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
 				<h4 class="s-text12 p-b-30">
-					Newsletter
+					Social Media
 				</h4>
 
-				<form>
-					<div class="effect1 w-size9">
-						<input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
-						<span class="effect1-line"></span>
-					</div>
-
-					<div class="w-size2 p-t-20">
-						<!-- Button -->
-						<button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-							Subscribe
-						</button>
-					</div>
-
-				</form>
+				<div class="flex-m p-t-30">
+					<div class="fs-18 color1 p-r-20 fa fa-facebook"></div>
+					<div  class="fs-18 color1 p-r-20 fa fa-instagram"></div>
+					<div  class="fs-18 color1 p-r-20 fa fa-pinterest-p"></div>
+					<div  class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></div>
+					<div  class="fs-18 color1 p-r-20 fa fa-youtube-play"></div>
+				</div>
 			</div>
 		</div>
 
 		<div class="t-center p-l-15 p-r-15">
-			<a href="#">
+			<a>
 				<img class="h-size2" src="images/icons/paypal.png" alt="IMG-PAYPAL">
 			</a>
 
-			<a href="#">
+			<a>
 				<img class="h-size2" src="images/icons/visa.png" alt="IMG-VISA">
 			</a>
 
-			<a href="#">
+			<a>
 				<img class="h-size2" src="images/icons/mastercard.png" alt="IMG-MASTERCARD">
 			</a>
 
-			<a href="#">
+			<a>
 				<img class="h-size2" src="images/icons/express.png" alt="IMG-EXPRESS">
 			</a>
 
-			<a href="#">
+			<a>
 				<img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
 			</a>
 
 			<div class="t-center s-text8 p-t-20">
-				Copyright ? 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+				Copyright 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+			</div>
+			<div class="t-center s-text8 p-t-20">
+				Add shopping function and dynamic data by <i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/YangYangXun" >YangXun</a>
 			</div>
 		</div>
 	</footer>

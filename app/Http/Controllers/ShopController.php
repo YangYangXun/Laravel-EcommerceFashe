@@ -24,7 +24,7 @@ class ShopController extends Controller
             $categoryName = $categories->where('slug', request()->category)->first()->name;
         } else {
             // $products = Product::where('featured', true);
-            $products = Product::inRandomOrder()->take(12)->get();
+            $products = Product::inRandomOrder()->get();
             $categories = Category::all();
             $categoryName = 'Featured';
         }

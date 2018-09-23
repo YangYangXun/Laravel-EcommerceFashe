@@ -36,6 +36,13 @@ Route::patch('/cart/{product}', 'CartController@update')->name('cart.update');
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->middleware('auth');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 
+//About  contact
+Route::get('/about', function () {
+    return view('about');
+})->name('about.index');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact.index');
 // Guest checkout
 Route::get('/guestcheckout', 'CheckoutController@index')->name('guestcheckout.index');
 

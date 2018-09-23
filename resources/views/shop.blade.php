@@ -116,12 +116,13 @@
 											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
 									</a> -->
 
-									<div class="block2-btn-addcart w-size1 trans-0-4">
+									<form action="{{ route('cart.store', $product) }}" method="POST" class="block2-btn-addcart w-size1 trans-0-4">
 										<!-- Button -->
+										{{ csrf_field() }}
 										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
 												Add to Cart
 										</button>
-									</div>
+									</form>
 								</div>
 							</div>
 
