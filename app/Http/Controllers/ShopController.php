@@ -54,9 +54,11 @@ class ShopController extends Controller
         //
         $product = Product::where('slug', $slug)->firstOrFail();
         $productRelates = Product::where('slug', '!=', $slug)->inRandomOrder()->take(8)->get();
+        $categories = $product->categories;
         return view('products-detail')->with([
             'product' => $product,
             'productRelates' => $productRelates,
+            'categories' => $categories,
         ]);
 
     }

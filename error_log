@@ -1,0 +1,2 @@
+[26-Sep-2018 13:57:04 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Voyager\VoyagerBreadController' not found in /home/l46ebvc20bw8/public_html/EcommerceFashe/app/Http/Controllers/Voyager/ProductsController.php on line 21
+[27-Sep-2018 07:11:33 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Voyager\Controller' not found in /home/l46ebvc20bw8/public_html/EcommerceFashe/app/Http/Controllers/Voyager/OrdersController.php on line 19

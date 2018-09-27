@@ -44,8 +44,8 @@
 
 	<!-- top noti -->
 	<div class="flex-c-m size22 bg0 s-text21 pos-relative">
-		20% off everything!
-		<a href="product.html" class="s-text22 hov6 p-l-5">
+		Welcome to EcommerceFashe !
+		<a href="{{route('shop.index')}}" class="s-text22 hov6 p-l-5">
 			Shop Now
 		</a>
 
@@ -121,7 +121,7 @@
 								@foreach (Cart::content() as $item)
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-										<img src="{{ URL::asset('images/'.$item->model->slug.'.jpg') }}" alt="IMG">
+										<img src="{{ asset('storage/'.$item->model->image) }}" alt="IMG">
 									</div>
 
 									<div class="header-cart-item-txt">
@@ -202,7 +202,7 @@
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
 			<a href="{{route('home')}}" class="logo-mobile">
-				<img src="images/icons/logo.png" alt="IMG-LOGO">
+				<img src="{{ asset('images/icons/logo.png') }}" alt="IMG-LOGO">
 			</a>
 
 			<!-- Button show menu -->
@@ -211,9 +211,9 @@
 				<div class="header-icons-mobile">
 					<a href="" class="header-wrapicon1 dis-block">
 					    @guest
-						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+						<img src="{{ asset('images/icons/icon-header-01.png') }}" class="header-icon1" alt="ICON">
 						@else
-						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON"> {{ Auth::user()->name }}
+						<img src="{{ asset('images/icons/icon-header-01.png') }}" class="header-icon1" alt="ICON"> {{ Auth::user()->name }}
 						@endguest
 					</a>
 
@@ -221,7 +221,7 @@
 
 					<div class="header-wrapicon2">
 					<a href="{{route('cart.index')}}" class="header-wrapicon1 dis-block">
-						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+						<img src="{{ asset('images/icons/icon-header-02.png') }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
 						@if(Cart::count() > 0)
 						<span class="header-icons-noti">{{Cart::count()}}</span></a>
 						@else
@@ -371,7 +371,7 @@
 				</ul>
 			</div>
 			<div class="ml-4"></div>
-			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
+			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3 ml-5">
 				<h4 class="s-text12 p-b-30">
 					Social Media
 				</h4>
@@ -388,23 +388,23 @@
 
 		<div class="t-center p-l-15 p-r-15">
 			<a>
-				<img class="h-size2" src="images/icons/paypal.png" alt="IMG-PAYPAL">
+				<img class="h-size2" src="{{asset('images/icons/paypal.png')}}" alt="IMG-PAYPAL">
 			</a>
 
 			<a>
-				<img class="h-size2" src="images/icons/visa.png" alt="IMG-VISA">
+				<img class="h-size2" src="{{asset('images/icons/visa.png')}}" alt="IMG-VISA">
 			</a>
 
 			<a>
-				<img class="h-size2" src="images/icons/mastercard.png" alt="IMG-MASTERCARD">
+				<img class="h-size2" src="{{asset('images/icons/mastercard.png')}}" alt="IMG-MASTERCARD">
 			</a>
 
 			<a>
-				<img class="h-size2" src="images/icons/express.png" alt="IMG-EXPRESS">
+				<img class="h-size2" src="{{asset('images/icons/express.png')}}" alt="IMG-EXPRESS">
 			</a>
 
 			<a>
-				<img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
+				<img class="h-size2" src="{{asset('images/icons/discover.png')}}" alt="IMG-DISCOVER">
 			</a>
 
 			<div class="t-center s-text8 p-t-20">

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use App\Product;
+use App\OrderProduct;
 use Illuminate\Http\Request;
 use App\Http\Requests\CheckoutRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -41,7 +44,7 @@ class CheckoutController extends Controller
     {
         //
 
-        // dd($request->all());
+        // dd(Cart::content());
         try {
 
             $contents = Cart::content()->map(function ($item) {
@@ -61,22 +64,18 @@ class CheckoutController extends Controller
                 ],
             ]);
 
+           
+            $this->addToOrdersTables($request, null);
             // Clean Cart
             Cart::destroy();
 
+        
+
             return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
 
-            // $order = $this->addToOrdersTables($request, null);
-            // Mail::send(new OrderPlaced($order));
-
-            // // decrease the quantities of all the products in the cart
-            // $this->decreaseQuantities();
-
-            // Cart::instance('default')->destroy();
-            // session()->forget('coupon');
 
         } catch (CardErrorException $e) {
-            // $this->addToOrdersTables($request, $e->getMessage());
+            $this->addToOrdersTables($request, $e->getMessage());
             return back()->withErrors('Error! ' . $e->getMessage());
         }
 
@@ -125,5 +124,32 @@ class CheckoutController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    protected function addToOrdersTables($request, $error)
+    {
+        // Insert into orders table
+        $order = Order::create([
+            'user_id' => auth()->user() ? auth()->user()->id : null,
+            'billing_email' => $request->email,
+            'billing_name' => $request->name,
+            'billing_address' => $request->address,
+            'billing_city' => $request->city,
+            'billing_phone' => $request->phone,
+            'billing_name_on_card' => $request->name_on_card,
+            'billing_total' => Cart::subtotal()/1000 ,
+            'error' => $error,
+        ]);
+
+        // Insert into order_product table
+        foreach (Cart::content() as $item) {
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'product_id' => $item->model->id,
+                'quantity' => $item->qty,
+            ]);
+        }
+
+        return $order;
     }
 }

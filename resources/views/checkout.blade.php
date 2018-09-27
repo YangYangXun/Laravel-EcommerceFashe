@@ -137,7 +137,7 @@
 					<tr class="">
 						<td class="">
 							<div class="cart-img-product b-rad-4 o-f-hidden">
-								<img src="images/{{$item->model->slug}}.jpg" alt="IMG-PRODUCT">
+								<img src="{{ asset('storage/'.$item->model->image) }}" alt="IMG-PRODUCT">
 							</div>
 						</td>
 						<td class="">{{$item->model->name}}</td>

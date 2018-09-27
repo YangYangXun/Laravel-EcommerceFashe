@@ -53,7 +53,7 @@
 						<tr class="table-row">
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="images/{{$item->model->slug}}.jpg" alt="IMG-PRODUCT">
+									<img src="{{ asset('storage/'.$item->model->image) }}" alt="IMG-PRODUCT">
 								</div>
 							</td>
 
@@ -88,8 +88,26 @@
 					</table>
 				</div>
 			</div>
+                        
+                        <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
+		        <div class="flex-w flex-m w-full-sm">
+					<div class="size11  m-r-10">
 
-		<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
+					</div>
+
+					<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
+
+					</div>
+				</div>
+
+				<div class="size10 trans-0-4 m-t-10 m-b-10">
+					<!-- Button -->
+					<a href="{{route('cart.index')}}" class="btn btn-outline-dark flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">Update Cart</a>
+				</div>
+		</div>
+
+
+		
 
 			<!-- Total -->
 			<div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
@@ -134,7 +152,7 @@
 			</div>
 			@endif
 
-		</div>
+		
 	</section>
 
 
@@ -154,7 +172,7 @@
 		// const productQuantity = element.getAttribute('value')
 		const productQuantity = document.getElementById(id);
         element.addEventListener('click', function() {
-		  	axios.patch(`/EcommerceFashe/public/cart/${id}`, {
+		  	axios.patch(`/EcommerceFashe/cart/${id}`, {
 				quantity: productQuantity.value,
 				id: id
 			})
