@@ -94,7 +94,7 @@
 		<div class="container">
 			<div class="sec-title p-b-60">
 				<h3 class="m-text5 t-center">
-					Related Products
+					Other Products
 				</h3>
 			</div>
 
@@ -106,20 +106,19 @@
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-img wrap-pic-w of-hidden pos-relative">
-								<img src="../images/{{$product->slug}}.jpg" alt="IMG-PRODUCT">
+								<img src="{{ asset('storage/'.$product->image) }}" alt="IMG-PRODUCT">
 
 								<div class="block2-overlay trans-0-4">
-									<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-										<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-										<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-									</a>
+						
 
-									<div class="block2-btn-addcart w-size1 trans-0-4">
+									
+                                                                        <form action="{{ route('cart.store', $product) }}" method="POST" class="block2-btn-addcart w-size1 trans-0-4">
+                                                                                {{ csrf_field() }}
 										<!-- Button -->
 										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
 											Add to Cart
 										</button>
-									</div>
+									</form>
 								</div>
 							</div>
 
