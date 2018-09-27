@@ -1,65 +1,80 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Laravel-Ecomm Fashe
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## 網站簡介
+利用Laravel和Bootstrap template實作一個購物電商網站，其購物主題為服飾
 
-## About Laravel
+[主頁面(Home Page)](http://yangsirweb.com/EcommerceFashe/home) 
+[後台頁面(Admin)](http://yangsirweb.com/EcommerceFashe/admin)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> 管理員
+> Email: admin@admin.com
+> Password: password
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+## 主要功能
 
-## Learning Laravel
+* 商品
+⌞商品陳列
+⌞商品種類
+⌞商品價錢排序
+⌞加入購物車
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+* 購物車
+⌞購物車商品列表
+⌞移除商品
+⌞商品數量
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+* 結帳
+⌞帳單
+⌞Stripe Api 模擬信用卡服務
 
-## Laravel Sponsors
+* 用戶
+⌞註冊
+⌞登入
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+* 後台 (只有admin@admin.com 能登入) 
+⌞訂單管理
+⌞商品管理
+⌞帳戶管理
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
 
-## Contributing
+## 運用技術
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. PHP
+2. Laravel Framework
+3. MySQL
+4. Bootstrap
+5. HTML/CSS
 
-## Security Vulnerabilities
+## 使用說明
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## plugin & 擴展套件
 
-## License
+Stripe API 服務
+Laravel ShoppingCar Package
+Laravel Voyager AdminPackage
+ 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+
+
+
+
+
+
+
+
+## 頁面展示
+
+homepage
+![](https://drive.google.com/open?id=1j4vDi7Cv_6oYoEqkesVD8vSHK33MS5IL)
+
+
+shop
+![](https://i.imgur.com/m8T4TKX.jpg)
+
+shooping cart
+![](https://i.imgur.com/GOLbmNr.png)
