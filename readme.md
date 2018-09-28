@@ -7,9 +7,9 @@
 [後台頁面(Admin)](http://yangsirweb.com/EcommerceFashe/admin)
 
 
-> 管理員（Admin）
-> Email: admin@admin.com
-> Password: password
+> 管理員（Admin）<BR>
+> Email: admin@admin.com <BR>
+> Password: password <BR>
 
 ## 主要功能
 
@@ -48,35 +48,43 @@
 
 ## 使用說明
 
-Step 1. 點擊右上角Login或Register，也可使用預設Admin帳號(如上所示)。
+Step 1. 點擊右上角Login或Register，也可使用預設Admin帳號(如上網站簡介中所示)。
 
 ![](https://raw.githubusercontent.com/YangYangXun/ProjectImage/master/EcommerceFashe/home-page.png)
 
-Step 2. 成功登入後如圖所示
+Step 2. 成功登入後如圖所示。
 
 ![](https://raw.githubusercontent.com/YangYangXun/ProjectImage/master/EcommerceFashe/login.png)
 
 
 
-Step 3. 到Shop分頁，點擊商品Add To Cart
+Step 3. 到Shop分頁，點擊商品Add To Cart。
 
 ![](https://raw.githubusercontent.com/YangYangXun/ProjectImage/master/EcommerceFashe/add-to-cart.png)
 
 
 
-Step 4. 加入後自動跳轉頁面到購物車清單（cart）
+Step 4. 點擊後自動跳轉頁面到購物車清單（cart）。
 
 ![](https://raw.githubusercontent.com/YangYangXun/ProjectImage/master/EcommerceFashe/cart.png)
 
 
 
-Step 5. 能夠調整商品數量或是移除商品，調整數量後按下Update Cart 即可刷新金額，確認購買商品後按下Proceed To Checkout 即可到付款頁面填寫帳單細項
+Step 5. 購物車清單頁面能夠調整商品數量或是移除商品，調整數量後按下Update Cart 即可刷新金額，確認購買商品後按下Proceed To Checkout 即可到付款頁面填寫帳單細項。
 
 ![](https://raw.githubusercontent.com/YangYangXun/ProjectImage/master/EcommerceFashe/update-cart.png)
 
 
 
-Step 7. 填寫表單後即可送出訂單，信用卡模擬測試可用()
+Step 7. 填寫表單後即可送出訂單，信用卡模擬測試可用。
+
+* 此支付管道僅模擬測試用，僅能使用測試卡號。卡號來源 [Stripe Testing](https://stripe.com/docs/testing)
+
+| 卡號 | 月/年 CVC | 說明 |
+| -------- | -------- | -------- |
+| 4242 4242 4242 4242    | 04/24 242     | Visa    |
+| 4000 0000 0000 0069    | 04/24 242     | 過期卡測試    |
+
 
 ![](https://raw.githubusercontent.com/YangYangXun/ProjectImage/master/EcommerceFashe/bill-checkout.png)
 
@@ -89,9 +97,10 @@ Step 8. 可到[後台](http://yangsirweb.com/EcommerceFashe/admin)查看訂單(O
 
 ## plugin & 擴展套件
 
-Stripe API 服務
-Laravel ShoppingCar Package
-Laravel Voyager Admin Package
+* Stripe API 服務 <BR>
+* Laravel ShoppingCar Package <BR>
+* Laravel Voyager Admin Package <BR>
+
  
 
 
