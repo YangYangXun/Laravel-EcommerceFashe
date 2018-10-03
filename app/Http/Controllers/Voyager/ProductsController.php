@@ -312,6 +312,7 @@ class ProductsController extends VoyagerBaseController
      */
     public function store(Request $request)
     {
+        
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -330,6 +331,8 @@ class ProductsController extends VoyagerBaseController
             $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
 
             event(new BreadDataAdded($dataType, $data));
+
+            $this->updateProductCategories($request, $data->id);
 
             if ($request->ajax()) {
                 return response()->json(['success' => true, 'data' => $data]);
